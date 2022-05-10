@@ -1,5 +1,5 @@
 .venv/
-csv/
-!csv/exemplo.csv
+csv/*
+!*csv/exemplo.csv
 lista_arquivos.yaml
 resultado.csv

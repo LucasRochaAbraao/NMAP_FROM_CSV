@@ -1,0 +1,4 @@
+srv-aws-01,Dev 1,Ubuntu Server,192.168.100.1,1 CPU,2 CORE
+srv-aws-02,Prod 1,Ubuntu Server,192.168.100.2,2 CPU,4 CORE
+srv-aws-03,Prod 2,Ubuntu Server,192.168.100.3,2 CPU,4 CORE
+srv-aws-04,Firewall,Ubuntu Server,192.168.100.4,1 CPU,2 CORE
