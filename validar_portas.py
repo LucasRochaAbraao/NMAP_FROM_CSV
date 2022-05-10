@@ -4,7 +4,7 @@ import nmap
 import time
 import yaml
 
-def scan(hosts:dict, setor:str) -> None:
+def scan(hosts:dict, setor:str, start_time:float) -> None:
     """ recebe um dict de hosts no formato:
     {'hostname': 'ip', 'hostname2': 'ip2', ...}, faz a consulta nmap
     nas portas 10050, 10051 e 161, e retorna pro stdout e um arquivo
@@ -33,10 +33,11 @@ def scan(hosts:dict, setor:str) -> None:
 
                 hostname_ip = f"{hostname[:22]} ({ip})"
 
-                print(f"{hostname_ip:^40} {port_10050:^15} {port_10051:^15} {port_161:^15}")
+                print(f"{hostname_ip:<40} {port_10050:^15} {port_10051:^15} {port_161:^15}")
                 save_to_csv(result=[hostname, ip, port_10050, port_10051, port_161, setor], mode='a')
         else:
             print(f"{hostname} não tem IP cadastrado.")
+    print(f"Se passaram {(time.time() - start_time)/60:.2f} minutos.")
 
 def get_hosts(hosts_csv:list) -> dict: # [filename.csv, pos_hostname, pos_ip]
     """recebe uma lista obtida do arquivo yaml de configuração contendo
@@ -64,6 +65,6 @@ if __name__ == '__main__':
     save_to_csv(result=['hostname', 'ip', 'status_porta_10050', 'status_porta_10051', 'status_porta_161', 'setor'], mode='w')
     for setor, hosts in csv_files['arquivos'].items():
         hosts_csv = get_hosts(hosts)
-        print(scan(hosts_csv, setor))
+        scan(hosts_csv, setor, start_time)
 
     print(f"--- levou {(time.time() - start_time)/60:.2f} minutos ---")
